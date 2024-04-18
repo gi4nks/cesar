@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Cesar's APIs
+  description: RESTful APIs for converting numbers to Roman numerals
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /convert/{start}/{end}:
+    get:
+      summary: Convert a range of numbers to Roman numerals
+      description: Returns a JSON object mapping each number in the specified range to its corresponding Roman numeral.
+      parameters:
+        - name: start
+          in: path
+          description: The start of the range (inclusive)
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3999
+        - name: end
+          in: path
+          description: The end of the range (inclusive)
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3999
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Bad Request response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+  /convert/{start}:
+    get:
+      summary: Convert a single number to a Roman numeral
+      description: Returns the Roman numeral representation of the specified number.
+      parameters:
+        - name: start
+          in: path
+          description: The number to convert
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3999
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Bad Request response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
